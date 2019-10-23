@@ -331,8 +331,8 @@
       it('should handle iterators that work with a sorted array', function() {
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
- 
-        expect(_.uniq(numbers)).to.eql([1, 2]);
+
+        expect(_.uniq(numbers, true, iterator)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {
@@ -340,13 +340,6 @@
         var uniqueNumbers = _.uniq(numbers);
 
         expect(uniqueNumbers).to.not.equal(numbers);
-      });
-
-      it('should maintain same array length', function() {
-        var numbers = [1, 1, 2, 3];
-        var shuffled = _.shuffle(numbers);
-
-        expect(shuffled.length).to.equal(numbers.length);
       });
     });
 
@@ -474,9 +467,7 @@
         var orderTraversed = [];
 
         _.reduce([1, 2, 3, 4], function(memo, item) {
-          // FILL_ME_IN
-          // Add a line here that makes this test pass
-          // for a working implementation of reduce
+          orderTraversed.push(item);
           return memo;
         }, 10);
 
@@ -506,7 +497,7 @@
         expect(result).to.equal(4);
       });
 
-      it('Fill me in with a description of the behavior this test is checking for', function() {
+      it('should pass with an accumulator of 0', function() {
         var result = _.reduce([1, 2, 3], function(memo, item) {
           return memo * item;
         }, 0);
